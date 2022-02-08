@@ -22,15 +22,15 @@ Partial Class Main
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim CustomLabel15 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-        Dim CustomLabel16 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-        Dim CustomLabel17 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-        Dim CustomLabel18 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-        Dim CustomLabel19 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-        Dim CustomLabel20 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-        Dim CustomLabel21 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim CustomLabel1 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim CustomLabel2 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim CustomLabel3 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim CustomLabel4 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim CustomLabel5 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim CustomLabel6 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim CustomLabel7 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.dgDrivers = New System.Windows.Forms.DataGridView()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.ChartAI = New System.Windows.Forms.DataVisualization.Charting.Chart()
@@ -74,7 +74,6 @@ Partial Class Main
         Me.dgDrivers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgDrivers.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgDrivers.Location = New System.Drawing.Point(0, 0)
-        Me.dgDrivers.MultiSelect = False
         Me.dgDrivers.Name = "dgDrivers"
         Me.dgDrivers.RowHeadersVisible = False
         Me.dgDrivers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -93,38 +92,38 @@ Partial Class Main
         'ChartAI
         '
         Me.ChartAI.BackColor = System.Drawing.Color.Transparent
-        CustomLabel15.Text = "Skill"
-        CustomLabel16.Text = "Aggression"
-        CustomLabel17.Text = "Optimism"
-        CustomLabel18.Text = "Smoothness"
-        CustomLabel19.Text = "Age"
-        CustomLabel20.Text = "Crew Skill"
-        CustomLabel21.Text = "Pit Strategy"
-        ChartArea3.AxisX.CustomLabels.Add(CustomLabel15)
-        ChartArea3.AxisX.CustomLabels.Add(CustomLabel16)
-        ChartArea3.AxisX.CustomLabels.Add(CustomLabel17)
-        ChartArea3.AxisX.CustomLabels.Add(CustomLabel18)
-        ChartArea3.AxisX.CustomLabels.Add(CustomLabel19)
-        ChartArea3.AxisX.CustomLabels.Add(CustomLabel20)
-        ChartArea3.AxisX.CustomLabels.Add(CustomLabel21)
-        ChartArea3.AxisX.IsLabelAutoFit = False
-        ChartArea3.AxisX.LabelStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea3.AxisX.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet
-        ChartArea3.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[False]
-        ChartArea3.AxisY.Interval = 30.0R
-        ChartArea3.AxisY.LabelStyle.Enabled = False
-        ChartArea3.AxisY.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet
-        ChartArea3.AxisY.MajorTickMark.Enabled = False
-        ChartArea3.AxisY.Maximum = 100.0R
-        ChartArea3.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[False]
-        ChartArea3.Name = "ChartArea1"
-        Me.ChartAI.ChartAreas.Add(ChartArea3)
+        CustomLabel1.Text = "Skill"
+        CustomLabel2.Text = "Aggression"
+        CustomLabel3.Text = "Optimism"
+        CustomLabel4.Text = "Smoothness"
+        CustomLabel5.Text = "Age"
+        CustomLabel6.Text = "Crew Skill"
+        CustomLabel7.Text = "Pit Strategy"
+        ChartArea1.AxisX.CustomLabels.Add(CustomLabel1)
+        ChartArea1.AxisX.CustomLabels.Add(CustomLabel2)
+        ChartArea1.AxisX.CustomLabels.Add(CustomLabel3)
+        ChartArea1.AxisX.CustomLabels.Add(CustomLabel4)
+        ChartArea1.AxisX.CustomLabels.Add(CustomLabel5)
+        ChartArea1.AxisX.CustomLabels.Add(CustomLabel6)
+        ChartArea1.AxisX.CustomLabels.Add(CustomLabel7)
+        ChartArea1.AxisX.IsLabelAutoFit = False
+        ChartArea1.AxisX.LabelStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea1.AxisX.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet
+        ChartArea1.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[False]
+        ChartArea1.AxisY.Interval = 30.0R
+        ChartArea1.AxisY.LabelStyle.Enabled = False
+        ChartArea1.AxisY.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet
+        ChartArea1.AxisY.MajorTickMark.Enabled = False
+        ChartArea1.AxisY.Maximum = 100.0R
+        ChartArea1.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[False]
+        ChartArea1.Name = "ChartArea1"
+        Me.ChartAI.ChartAreas.Add(ChartArea1)
         Me.ChartAI.Location = New System.Drawing.Point(697, -9)
         Me.ChartAI.Name = "ChartAI"
-        Series3.ChartArea = "ChartArea1"
-        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Radar
-        Series3.Name = "s1Drivers"
-        Me.ChartAI.Series.Add(Series3)
+        Series1.ChartArea = "ChartArea1"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Radar
+        Series1.Name = "s1Drivers"
+        Me.ChartAI.Series.Add(Series1)
         Me.ChartAI.Size = New System.Drawing.Size(221, 178)
         Me.ChartAI.TabIndex = 2
         Me.ChartAI.Text = "ChartAI"
