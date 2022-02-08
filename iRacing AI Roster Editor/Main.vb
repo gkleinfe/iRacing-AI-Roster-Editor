@@ -4,6 +4,8 @@ Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 Imports Newtonsoft.Json.Converters
 Imports Newtonsoft.Json.Serialization
+Imports System.Collections.Specialized
+
 Public Class Main
     Dim ds As DataSet
     Dim dt As DataTable
@@ -160,20 +162,19 @@ Public Class Main
         DriversBindingSource.DataSource = dt
         dgDrivers.DataSource = DriversBindingSource
 
+        Dim myCol As StringCollection = New StringCollection()
+        Dim myArr As String() = New String() {"driverName", "carNumber", "driverSkill", "driverAggression", "driverOptimism", "driverSmoothness", "pitCrewSkill", "strategyRiskiness", "driverAge"}
+        myCol.AddRange(myArr)
+
+        For Each column As DataGridViewColumn In dgDrivers.Columns
+            If Not myCol.Contains(column.Name) Then
+                dgDrivers.Columns(column.Name).Visible = False
+            End If
+        Next
         dgDrivers.Columns("driverName").ReadOnly = True
         dgDrivers.Columns("driverName").DefaultCellStyle.BackColor = Color.LightGray
         dgDrivers.Columns("carNumber").ReadOnly = True
         dgDrivers.Columns("carNumber").DefaultCellStyle.BackColor = Color.LightGray
-        dgDrivers.Columns("carDesign").Visible = False
-        dgDrivers.Columns("suitDesign").Visible = False
-        dgDrivers.Columns("helmetDesign").Visible = False
-        dgDrivers.Columns("carPath").Visible = False
-        dgDrivers.Columns("carID").Visible = False
-        dgDrivers.Columns("sponsor1").Visible = False
-        dgDrivers.Columns("sponsor2").Visible = False
-        dgDrivers.Columns("numberDesign").Visible = False
-        dgDrivers.Columns("id").Visible = False
-        dgDrivers.Columns("rowIndex").Visible = False
 
         LoadChart()
     End Sub
@@ -202,7 +203,6 @@ Public Class Main
             File.Copy(lblAIRosterFolder.Text & "\" & FolderName & "\roster.json", lblAIRosterFolder.Text & "\" & FolderName & "\roster.bak")
         End If
     End Sub
-
 
     Private Function GetAverage(ColumnName As String) As Short
         Dim iSum As Integer
