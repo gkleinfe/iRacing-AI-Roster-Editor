@@ -2,8 +2,6 @@
 Imports System.IO
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
-Imports Newtonsoft.Json.Converters
-Imports Newtonsoft.Json.Serialization
 Imports System.Collections.Specialized
 
 Public Class Main
@@ -12,17 +10,12 @@ Public Class Main
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblAIRosterFolder.Text = ConfigurationManager.AppSettings("aiRosterFolder")
 
-        'Check to see if ai roster folder  is empty and populate it with a default value
+        'Check to see if ai roster folder is empty and populate it with a default value. Then attempts to populate roster combobox
         If lblAIRosterFolder.Text.Length = 0 Then
-            WriteConfigKey("aiRosterFolder", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\iRacing\airosters")
+            GetValidFolderPath(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\iRacing\airosters")
             lblAIRosterFolder.Text = ConfigurationManager.AppSettings("aiRosterFolder")
-            'End If
-
-            'If lblAIRosterFolder.Text.Length = 0 Then
-            '    MsgBox("You must select your iRacing AI roster folder.  It's usually Documents\iRacing\airosters.")
-            'GetAIRosterFolder()
-            FindAIRosters()
         End If
+        FillAIRosters()
     End Sub
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         WriteAIRoster(cboAIRoster.SelectedItem.ToString)
@@ -100,21 +93,29 @@ Public Class Main
 
     End Sub
     Private Sub cboAIRoster_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAIRoster.SelectedIndexChanged
+
+        ClearChart()
+
         If Not cboAIRoster.Items(0).ToString = "No Rosters Found" Then
             ds = JObject.Parse(ReadJSON(cboAIRoster.SelectedItem.ToString)).ToObject(Of DataSet)()
             dt = ds.Tables("drivers")
+
+            dt.Columns("driverName").SetOrdinal(0)
+            dt.Columns("carNumber").SetOrdinal(1)
+            dt.Columns("driverAge").SetOrdinal(2)
+            dt.Columns("driverSkill").SetOrdinal(3)
+            dt.Columns("driverOptimism").SetOrdinal(4)
+            dt.Columns("driverAggression").SetOrdinal(5)
+            dt.Columns("driverSmoothness").SetOrdinal(6)
+            dt.Columns("strategyRiskiness").SetOrdinal(7)
+            dt.Columns("pitCrewSkill").SetOrdinal(8)
+
             BindAIRoster()
         End If
     End Sub
 
-
-    Private Sub WriteAIRoster(FolderName As String)
-        CreateBackup(FolderName)
-        Dim outputjson As String = JsonConvert.SerializeObject(ds, Formatting.Indented)
-        File.WriteAllText(lblAIRosterFolder.Text & "\" & FolderName & "\roster.json", outputjson)
-    End Sub
     Private Sub LoadChart()
-        ClearChart()
+        'ClearChart()
         ChartAI.Series("s1Drivers").Points.AddXY(0, GetAverage("driverSkill"))
         ChartAI.Series("s1Drivers").Points.AddXY(1, GetAverage("driverAggression"))
         ChartAI.Series("s1Drivers").Points.AddXY(2, GetAverage("driverOptimism"))
@@ -135,23 +136,22 @@ Public Class Main
         ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name)
     End Sub
     Private Sub GetAIRosterFolder()
-        FolderBrowserDialog1.ShowDialog()
+        Dim dlgResult As DialogResult
+        With FolderBrowserDialog1
+            .SelectedPath = lblAIRosterFolder.Text
+            .ShowNewFolderButton = False
+            .Description = "Choose AI folder"
+            dlgResult = .ShowDialog()
+        End With
+        If Not dlgResult = Windows.Forms.DialogResult.Cancel Then
+            WriteConfigKey("aiRosterFolder", FolderBrowserDialog1.SelectedPath)
 
-        WriteConfigKey("aiRosterFolder", FolderBrowserDialog1.SelectedPath)
+            lblAIRosterFolder.Text = ConfigurationManager.AppSettings("aiRosterFolder")
 
-        lblAIRosterFolder.Text = ConfigurationManager.AppSettings("aiRosterFolder")
-
-        'If lblAIRosterFolder.Text.Length = 0 Then
-        '    MsgBox("You didn't select a folder.  Please try again.")
-        '    ChooseRosterState(False)
-        '    RosterViewState(False)
-        'Else
-        ChooseRosterState(True)
+            ChooseRosterState(True)
             RosterViewState(True)
-        'End If
-        'If Not lblAIRosterFolder.Text.Length = 0 Then
-        FindAIRosters()
-        ' End If
+            FillAIRosters()
+        End If
     End Sub
     Private Sub ChooseRosterState(bEnabled As Boolean)
         cboAIRoster.Visible = bEnabled
@@ -198,10 +198,11 @@ Public Class Main
 
         LoadChart()
     End Sub
-    Private Sub FindAIRosters()
+    Private Sub FillAIRosters()
+        ' Fills AI roster combo box.  If no valid rostes found, it polulates the combo with no roster found message, disables it, and diables roster viewer controls
         cboAIRoster.Items.Clear()
 
-        For Each Dir As String In Directory.GetDirectories(lblAIRosterFolder.Text)
+        For Each Dir As String In Directory.GetDirectories(GetValidFolderPath(lblAIRosterFolder.Text))
             If File.Exists(Dir & "\roster.json") Then
                 Dim split As String() = Dir.Split("\")
                 Dim foldername As String = split(split.Length - 1)
@@ -210,21 +211,20 @@ Public Class Main
         Next
         'Look for valid roster folders and enable the appropriate controls
         If cboAIRoster.Items.Count = 0 Then
-            cboAIRoster.Items.Add("No Rosters Found")
-            cboAIRoster.Enabled = False
-            RosterViewState(False)
-        Else
-            cboAIRoster.Enabled = True
-            RosterViewState(True)
-        End If
-        cboAIRoster.SelectedIndex = 0
+                cboAIRoster.Items.Add("No Rosters Found")
+                cboAIRoster.Enabled = False
+                RosterViewState(False)
+            Else
+                cboAIRoster.Enabled = True
+                RosterViewState(True)
+            End If
+            cboAIRoster.SelectedIndex = 0
     End Sub
     Private Sub CreateBackup(FolderName As String)
         If Not File.Exists(lblAIRosterFolder.Text & "\" & FolderName & "\roster.bak") Then
             File.Copy(lblAIRosterFolder.Text & "\" & FolderName & "\roster.json", lblAIRosterFolder.Text & "\" & FolderName & "\roster.bak")
         End If
     End Sub
-
     Private Function GetAverage(ColumnName As String) As Short
         Dim iSum As Integer
         For Each row As DataGridViewRow In dgDrivers.Rows
@@ -236,5 +236,19 @@ Public Class Main
         Dim returnjson As String = File.ReadAllText(lblAIRosterFolder.Text & "\" & FolderName & "\roster.json")
         Return returnjson
     End Function
-
+    Private Sub WriteAIRoster(FolderName As String)
+        CreateBackup(FolderName)
+        Dim outputjson As String = JsonConvert.SerializeObject(ds, Formatting.Indented)
+        File.WriteAllText(lblAIRosterFolder.Text & "\" & FolderName & "\roster.json", outputjson)
+    End Sub
+    Private Function GetValidFolderPath(myFolderPath As String) As String
+        'Dim myFolderPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\iRacing\airosters"
+        ' Will return current if valid or recurse to parent folders until a valid path is returned
+        Do Until Directory.Exists(myFolderPath)
+            myFolderPath = Directory.GetParent(myFolderPath).FullName
+        Loop
+        WriteConfigKey("aiRosterFolder", myFolderPath)
+        lblAIRosterFolder.Text = myFolderPath
+        Return myFolderPath
+    End Function
 End Class
