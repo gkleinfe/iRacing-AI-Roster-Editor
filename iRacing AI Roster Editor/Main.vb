@@ -242,7 +242,6 @@ Public Class Main
         File.WriteAllText(lblAIRosterFolder.Text & "\" & FolderName & "\roster.json", outputjson)
     End Sub
     Private Function GetValidFolderPath(myFolderPath As String) As String
-        'Dim myFolderPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\iRacing\airosters"
         ' Will return current if valid or recurse to parent folders until a valid path is returned
         Do Until Directory.Exists(myFolderPath)
             myFolderPath = Directory.GetParent(myFolderPath).FullName
