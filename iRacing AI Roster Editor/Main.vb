@@ -24,7 +24,7 @@ Public Class Main
     Private Sub btnSkillDown_Click(sender As Object, e As EventArgs) Handles btnAgeDown.Click, btnAgeUp.Click, btnSkillDown.Click, btnSkillUp.Click, btnOptimismDown.Click, btnOptimismUp.Click, btnAgressionDown.Click, btnAgressionUp.Click, btnSmoothnessDown.Click, btnSmoothnessUp.Click, btnRiskinessDown.Click, btnRiskinessUp.Click, btnCrewSkillDown.Click, btnCrewSkillUp.Click
         Dim strColumnName As String = String.Empty
         Dim intIncrement As Int16
-        Dim intMinValue As Integer = 1
+        Dim intMinValue As Integer = 0
         Dim intMaxValue As Integer = 100
         Select Case sender.tag
             Case "SkillDown"
@@ -64,13 +64,13 @@ Public Class Main
                 strColumnName = "strategyRiskiness"
                 intIncrement = +1
             Case "AgeDown"
-                intMinValue = 15
-                intMaxValue = 70
+                intMinValue = 13
+                intMaxValue = 90
                 strColumnName = "driverAge"
                 intIncrement = -1
             Case "AgeUp"
-                intMinValue = 15
-                intMaxValue = 70
+                intMinValue = 13
+                intMaxValue = 90
                 strColumnName = "driverAge"
                 intIncrement = +1
 
