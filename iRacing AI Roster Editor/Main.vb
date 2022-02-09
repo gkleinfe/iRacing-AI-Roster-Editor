@@ -11,12 +11,18 @@ Public Class Main
     Dim dt As DataTable
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblAIRosterFolder.Text = ConfigurationManager.AppSettings("aiRosterFolder")
-        If lblAIRosterFolder.Text.Length = 0 Then
-            MsgBox("You must select your iRacing AI roster folder.  It's usually Documents\iRacing\airosters.")
 
-            GetAIRosterFolder()
+        'Check to see if ai roster folder  is empty and populate it with a default value
+        If lblAIRosterFolder.Text.Length = 0 Then
+            WriteConfigKey("aiRosterFolder", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\iRacing\airosters")
+            lblAIRosterFolder.Text = ConfigurationManager.AppSettings("aiRosterFolder")
+            'End If
+
+            'If lblAIRosterFolder.Text.Length = 0 Then
+            '    MsgBox("You must select your iRacing AI roster folder.  It's usually Documents\iRacing\airosters.")
+            'GetAIRosterFolder()
+            FindAIRosters()
         End If
-        FindAIRosters()
     End Sub
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         WriteAIRoster(cboAIRoster.SelectedItem.ToString)
@@ -85,6 +91,14 @@ Public Class Main
     Private Sub btnOpenFolderDialog_Click(sender As Object, e As EventArgs) Handles btnOpenFolderDialog.Click
         GetAIRosterFolder()
     End Sub
+    Private Sub btnOpenAIFolder_Click(sender As Object, e As EventArgs) Handles btnOpenAIFolder.Click
+        If lblAIRosterFolder.Text.Length = 0 Then
+            MsgBox("You have not specified a folder to find AI rosters.  Please click on 'Select AI Roster Folder' button to select a folder.")
+        Else
+            Process.Start(lblAIRosterFolder.Text)
+        End If
+
+    End Sub
     Private Sub cboAIRoster_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAIRoster.SelectedIndexChanged
         If Not cboAIRoster.Items(0).ToString = "No Rosters Found" Then
             ds = JObject.Parse(ReadJSON(cboAIRoster.SelectedItem.ToString)).ToObject(Of DataSet)()
@@ -112,26 +126,32 @@ Public Class Main
     Private Sub ClearChart()
         ChartAI.Series("s1Drivers").Points.Clear()
     End Sub
+    Private Sub WriteConfigKey(key As String, value As String)
+        Dim configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
+        Dim settings = configFile.AppSettings.Settings
+        settings.Remove(key)
+        settings.Add(key, value)
+        configFile.Save(ConfigurationSaveMode.Modified)
+        ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name)
+    End Sub
     Private Sub GetAIRosterFolder()
         FolderBrowserDialog1.ShowDialog()
 
-        Dim configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
-        Dim settings = configFile.AppSettings.Settings
-        settings.Remove("aiRosterFolder")
-        settings.Add("aiRosterFolder", FolderBrowserDialog1.SelectedPath)
-        configFile.Save(ConfigurationSaveMode.Modified)
-        ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name)
+        WriteConfigKey("aiRosterFolder", FolderBrowserDialog1.SelectedPath)
+
         lblAIRosterFolder.Text = ConfigurationManager.AppSettings("aiRosterFolder")
 
-        If lblAIRosterFolder.Text.Length = 0 Then
-            MsgBox("You didn't select a folder.  Please try again.")
-            ChooseRosterState(False)
-            RosterViewState(False)
-        Else
-            ChooseRosterState(True)
+        'If lblAIRosterFolder.Text.Length = 0 Then
+        '    MsgBox("You didn't select a folder.  Please try again.")
+        '    ChooseRosterState(False)
+        '    RosterViewState(False)
+        'Else
+        ChooseRosterState(True)
             RosterViewState(True)
-            FindAIRosters()
-        End If
+        'End If
+        'If Not lblAIRosterFolder.Text.Length = 0 Then
+        FindAIRosters()
+        ' End If
     End Sub
     Private Sub ChooseRosterState(bEnabled As Boolean)
         cboAIRoster.Visible = bEnabled
@@ -188,6 +208,7 @@ Public Class Main
                 cboAIRoster.Items.Add(foldername)
             End If
         Next
+        'Look for valid roster folders and enable the appropriate controls
         If cboAIRoster.Items.Count = 0 Then
             cboAIRoster.Items.Add("No Rosters Found")
             cboAIRoster.Enabled = False
@@ -215,4 +236,5 @@ Public Class Main
         Dim returnjson As String = File.ReadAllText(lblAIRosterFolder.Text & "\" & FolderName & "\roster.json")
         Return returnjson
     End Function
+
 End Class

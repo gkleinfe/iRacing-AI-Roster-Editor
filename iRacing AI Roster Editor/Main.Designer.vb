@@ -57,6 +57,7 @@ Partial Class Main
         Me.btnSkillUp = New System.Windows.Forms.Button()
         Me.lblBulkEdit = New System.Windows.Forms.Label()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+        Me.btnOpenAIFolder = New System.Windows.Forms.Button()
         CType(Me.dgDrivers, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ChartAI, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -67,6 +68,7 @@ Partial Class Main
         '
         'dgDrivers
         '
+        Me.dgDrivers.AllowUserToAddRows = False
         Me.dgDrivers.AllowUserToResizeColumns = False
         Me.dgDrivers.AllowUserToResizeRows = False
         Me.dgDrivers.BackgroundColor = System.Drawing.Color.White
@@ -77,7 +79,7 @@ Partial Class Main
         Me.dgDrivers.Name = "dgDrivers"
         Me.dgDrivers.RowHeadersVisible = False
         Me.dgDrivers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.dgDrivers.Size = New System.Drawing.Size(918, 383)
+        Me.dgDrivers.Size = New System.Drawing.Size(918, 417)
         Me.dgDrivers.TabIndex = 0
         '
         'btnUpdate
@@ -131,12 +133,14 @@ Partial Class Main
         'SplitContainer1
         '
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
         Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
         Me.SplitContainer1.Name = "SplitContainer1"
         Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.btnOpenAIFolder)
         Me.SplitContainer1.Panel1.Controls.Add(Me.cboAIRoster)
         Me.SplitContainer1.Panel1.Controls.Add(Me.lblAIRoster)
         Me.SplitContainer1.Panel1.Controls.Add(Me.lblAIRosterFolder)
@@ -164,8 +168,8 @@ Partial Class Main
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.dgDrivers)
-        Me.SplitContainer1.Size = New System.Drawing.Size(918, 565)
-        Me.SplitContainer1.SplitterDistance = 178
+        Me.SplitContainer1.Size = New System.Drawing.Size(918, 601)
+        Me.SplitContainer1.SplitterDistance = 180
         Me.SplitContainer1.TabIndex = 3
         '
         'cboAIRoster
@@ -373,15 +377,25 @@ Partial Class Main
         Me.lblBulkEdit.TabIndex = 3
         Me.lblBulkEdit.Text = "Bulk Edit"
         '
+        'btnOpenAIFolder
+        '
+        Me.btnOpenAIFolder.Location = New System.Drawing.Point(220, 77)
+        Me.btnOpenAIFolder.Name = "btnOpenAIFolder"
+        Me.btnOpenAIFolder.Size = New System.Drawing.Size(130, 23)
+        Me.btnOpenAIFolder.TabIndex = 24
+        Me.btnOpenAIFolder.Text = "Open AI Folder Location"
+        Me.btnOpenAIFolder.UseVisualStyleBackColor = True
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(918, 565)
+        Me.ClientSize = New System.Drawing.Size(918, 601)
         Me.Controls.Add(Me.SplitContainer1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(934, 2000)
+        Me.MinimumSize = New System.Drawing.Size(934, 500)
         Me.Name = "Main"
         Me.Text = "iRacing AI Roster Editor"
         CType(Me.dgDrivers, System.ComponentModel.ISupportInitialize).EndInit()
@@ -421,4 +435,5 @@ Partial Class Main
     Friend WithEvents Label3 As Label
     Friend WithEvents cboAIRoster As ComboBox
     Friend WithEvents lblAIRoster As Label
+    Friend WithEvents btnOpenAIFolder As Button
 End Class
