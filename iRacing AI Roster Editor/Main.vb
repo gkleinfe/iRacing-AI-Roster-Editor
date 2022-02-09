@@ -21,7 +21,7 @@ Public Class Main
         WriteAIRoster(cboAIRoster.SelectedItem.ToString)
         BindAIRoster()
     End Sub
-    Private Sub btnSkillDown_Click(sender As Object, e As EventArgs) Handles btnSkillDown.Click, btnSkillUp.Click, btnAgressionDown.Click, btnAggressionUp.Click, btnOptimismDown.Click, btnOptimismUp.Click, btnSmoothnessDown.Click, btnSmoothnessUp.Click, btnCrewSkillDown.Click, btnCrewSkillUp.Click, btnRiskinessDown.Click, btnRiskinessUp.Click, btnAgeDown.Click, btnAgeUp.Click
+    Private Sub btnSkillDown_Click(sender As Object, e As EventArgs) Handles btnAgeDown.Click, btnAgeUp.Click, btnSkillDown.Click, btnSkillUp.Click, btnOptimismDown.Click, btnOptimismUp.Click, btnAgressionDown.Click, btnAgressionUp.Click, btnSmoothnessDown.Click, btnSmoothnessUp.Click, btnRiskinessDown.Click, btnRiskinessUp.Click, btnCrewSkillDown.Click, btnCrewSkillUp.Click
         Dim strColumnName As String = String.Empty
         Dim intIncrement As Int16
         Dim intMinValue As Integer = 1
@@ -75,7 +75,8 @@ Public Class Main
                 intIncrement = +1
 
         End Select
-        For Each row As DataGridViewRow In dgDrivers.Rows
+
+        For Each row As DataGridViewRow In dgDrivers.SelectedRows
             If (intIncrement = -1 And row.Cells(strColumnName).Value > intMinValue) Or (intIncrement = +1 And row.Cells(strColumnName).Value < intMaxValue) Then
                 row.Cells(strColumnName).Value = row.Cells(strColumnName).Value + intIncrement
             End If
@@ -93,10 +94,9 @@ Public Class Main
 
     End Sub
     Private Sub cboAIRoster_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAIRoster.SelectedIndexChanged
-
-        ClearChart()
-
-        If Not cboAIRoster.Items(0).ToString = "No Rosters Found" Then
+        If cboAIRoster.Items(0).ToString = "No Rosters Found" Then
+            ClearChart()
+        Else
             ds = JObject.Parse(ReadJSON(cboAIRoster.SelectedItem.ToString)).ToObject(Of DataSet)()
             dt = ds.Tables("drivers")
 
@@ -115,7 +115,7 @@ Public Class Main
     End Sub
 
     Private Sub LoadChart()
-        'ClearChart()
+        ClearChart()
         ChartAI.Series("s1Drivers").Points.AddXY(0, GetAverage("driverSkill"))
         ChartAI.Series("s1Drivers").Points.AddXY(1, GetAverage("driverAggression"))
         ChartAI.Series("s1Drivers").Points.AddXY(2, GetAverage("driverOptimism"))
@@ -158,20 +158,20 @@ Public Class Main
         lblAIRoster.Visible = bEnabled
     End Sub
     Private Sub RosterViewState(benabled As Boolean)
-        btnSkillDown.Visible = benabled
-        btnSkillUp.Visible = benabled
-        btnAgressionDown.Visible = benabled
-        btnAggressionUp.Visible = benabled
-        btnOptimismDown.Visible = benabled
-        btnOptimismUp.Visible = benabled
-        btnSmoothnessDown.Visible = benabled
-        btnSmoothnessUp.Visible = benabled
-        btnCrewSkillDown.Visible = benabled
-        btnCrewSkillUp.Visible = benabled
-        btnRiskinessDown.Visible = benabled
-        btnRiskinessUp.Visible = benabled
         btnAgeDown.Visible = benabled
         btnAgeUp.Visible = benabled
+        btnSkillDown.Visible = benabled
+        btnSkillUp.Visible = benabled
+        btnOptimismDown.Visible = benabled
+        btnOptimismUp.Visible = benabled
+        btnAgressionDown.Visible = benabled
+        btnAgressionUp.Visible = benabled
+        btnSmoothnessDown.Visible = benabled
+        btnSmoothnessUp.Visible = benabled
+        btnRiskinessDown.Visible = benabled
+        btnRiskinessUp.Visible = benabled
+        btnCrewSkillDown.Visible = benabled
+        btnCrewSkillUp.Visible = benabled
         btnUpdate.Visible = benabled
         btnUpdate.Visible = benabled
         lblBulkEdit.Visible = benabled
