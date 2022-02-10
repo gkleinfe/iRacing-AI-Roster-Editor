@@ -22,15 +22,17 @@ Partial Class Main
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim CustomLabel15 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-        Dim CustomLabel16 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-        Dim CustomLabel17 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-        Dim CustomLabel18 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-        Dim CustomLabel19 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-        Dim CustomLabel20 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-        Dim CustomLabel21 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim CustomLabel8 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim CustomLabel9 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim CustomLabel10 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim CustomLabel11 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim CustomLabel12 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim CustomLabel13 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim CustomLabel14 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.dgDrivers = New System.Windows.Forms.DataGridView()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.ChartAI = New System.Windows.Forms.DataVisualization.Charting.Chart()
@@ -73,12 +75,24 @@ Partial Class Main
         Me.dgDrivers.AllowUserToResizeRows = False
         Me.dgDrivers.BackgroundColor = System.Drawing.Color.White
         Me.dgDrivers.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgDrivers.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgDrivers.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgDrivers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.dgDrivers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgDrivers.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgDrivers.Location = New System.Drawing.Point(0, 0)
         Me.dgDrivers.Name = "dgDrivers"
         Me.dgDrivers.RowHeadersVisible = False
         Me.dgDrivers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.dgDrivers.RowsDefaultCellStyle = DataGridViewCellStyle4
         Me.dgDrivers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgDrivers.Size = New System.Drawing.Size(918, 417)
         Me.dgDrivers.TabIndex = 0
@@ -95,38 +109,38 @@ Partial Class Main
         'ChartAI
         '
         Me.ChartAI.BackColor = System.Drawing.Color.Transparent
-        CustomLabel15.Text = "Skill"
-        CustomLabel16.Text = "Aggression"
-        CustomLabel17.Text = "Optimism"
-        CustomLabel18.Text = "Smoothness"
-        CustomLabel19.Text = "Age"
-        CustomLabel20.Text = "Crew Skill"
-        CustomLabel21.Text = "Pit Strategy"
-        ChartArea3.AxisX.CustomLabels.Add(CustomLabel15)
-        ChartArea3.AxisX.CustomLabels.Add(CustomLabel16)
-        ChartArea3.AxisX.CustomLabels.Add(CustomLabel17)
-        ChartArea3.AxisX.CustomLabels.Add(CustomLabel18)
-        ChartArea3.AxisX.CustomLabels.Add(CustomLabel19)
-        ChartArea3.AxisX.CustomLabels.Add(CustomLabel20)
-        ChartArea3.AxisX.CustomLabels.Add(CustomLabel21)
-        ChartArea3.AxisX.IsLabelAutoFit = False
-        ChartArea3.AxisX.LabelStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea3.AxisX.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet
-        ChartArea3.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[False]
-        ChartArea3.AxisY.Interval = 30.0R
-        ChartArea3.AxisY.LabelStyle.Enabled = False
-        ChartArea3.AxisY.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet
-        ChartArea3.AxisY.MajorTickMark.Enabled = False
-        ChartArea3.AxisY.Maximum = 100.0R
-        ChartArea3.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[False]
-        ChartArea3.Name = "ChartArea1"
-        Me.ChartAI.ChartAreas.Add(ChartArea3)
+        CustomLabel8.Text = "Skill"
+        CustomLabel9.Text = "Aggression"
+        CustomLabel10.Text = "Optimism"
+        CustomLabel11.Text = "Smoothness"
+        CustomLabel12.Text = "Age"
+        CustomLabel13.Text = "Crew Skill"
+        CustomLabel14.Text = "Pit Strategy"
+        ChartArea2.AxisX.CustomLabels.Add(CustomLabel8)
+        ChartArea2.AxisX.CustomLabels.Add(CustomLabel9)
+        ChartArea2.AxisX.CustomLabels.Add(CustomLabel10)
+        ChartArea2.AxisX.CustomLabels.Add(CustomLabel11)
+        ChartArea2.AxisX.CustomLabels.Add(CustomLabel12)
+        ChartArea2.AxisX.CustomLabels.Add(CustomLabel13)
+        ChartArea2.AxisX.CustomLabels.Add(CustomLabel14)
+        ChartArea2.AxisX.IsLabelAutoFit = False
+        ChartArea2.AxisX.LabelStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea2.AxisX.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet
+        ChartArea2.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[False]
+        ChartArea2.AxisY.Interval = 30.0R
+        ChartArea2.AxisY.LabelStyle.Enabled = False
+        ChartArea2.AxisY.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet
+        ChartArea2.AxisY.MajorTickMark.Enabled = False
+        ChartArea2.AxisY.Maximum = 100.0R
+        ChartArea2.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[False]
+        ChartArea2.Name = "ChartArea1"
+        Me.ChartAI.ChartAreas.Add(ChartArea2)
         Me.ChartAI.Location = New System.Drawing.Point(697, -9)
         Me.ChartAI.Name = "ChartAI"
-        Series3.ChartArea = "ChartArea1"
-        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Radar
-        Series3.Name = "s1Drivers"
-        Me.ChartAI.Series.Add(Series3)
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Radar
+        Series2.Name = "s1Drivers"
+        Me.ChartAI.Series.Add(Series2)
         Me.ChartAI.Size = New System.Drawing.Size(221, 178)
         Me.ChartAI.TabIndex = 2
         Me.ChartAI.Text = "ChartAI"
@@ -185,7 +199,7 @@ Partial Class Main
         'cboAIRoster
         '
         Me.cboAIRoster.FormattingEnabled = True
-        Me.cboAIRoster.Location = New System.Drawing.Point(15, 129)
+        Me.cboAIRoster.Location = New System.Drawing.Point(15, 123)
         Me.cboAIRoster.Name = "cboAIRoster"
         Me.cboAIRoster.Size = New System.Drawing.Size(350, 21)
         Me.cboAIRoster.TabIndex = 23
@@ -194,7 +208,7 @@ Partial Class Main
         '
         Me.lblAIRoster.AutoSize = True
         Me.lblAIRoster.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAIRoster.Location = New System.Drawing.Point(12, 112)
+        Me.lblAIRoster.Location = New System.Drawing.Point(12, 106)
         Me.lblAIRoster.Name = "lblAIRoster"
         Me.lblAIRoster.Size = New System.Drawing.Size(90, 13)
         Me.lblAIRoster.TabIndex = 22
