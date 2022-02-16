@@ -4,7 +4,7 @@ Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 Imports System.Collections.Specialized
 
-Public Class Main
+Public Class frmMain
     Dim ds As DataSet
     Dim dt As DataTable
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -211,14 +211,14 @@ Public Class Main
         Next
         'Look for valid roster folders and enable the appropriate controls
         If cboAIRoster.Items.Count = 0 Then
-                cboAIRoster.Items.Add("No Rosters Found")
-                cboAIRoster.Enabled = False
-                RosterViewState(False)
-            Else
-                cboAIRoster.Enabled = True
-                RosterViewState(True)
-            End If
-            cboAIRoster.SelectedIndex = 0
+            cboAIRoster.Items.Add("No Rosters Found")
+            cboAIRoster.Enabled = False
+            RosterViewState(False)
+        Else
+            cboAIRoster.Enabled = True
+            RosterViewState(True)
+        End If
+        cboAIRoster.SelectedIndex = 0
     End Sub
     Private Sub CreateBackup(FolderName As String)
         If Not File.Exists(lblAIRosterFolder.Text & "\" & FolderName & "\roster.bak") Then
@@ -250,4 +250,13 @@ Public Class Main
         lblAIRosterFolder.Text = myFolderPath
         Return myFolderPath
     End Function
+
+    Private Sub dgDrivers_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgDrivers.CellMouseDoubleClick
+        If e.RowIndex >= 0 AndAlso e.ColumnIndex >= 0 Then
+            If (dgDrivers.SelectedCells.Count > 0) Then
+                dgDrivers.EndEdit()
+                frmDriver.ShowDialog()
+            End If
+        End If
+    End Sub
 End Class

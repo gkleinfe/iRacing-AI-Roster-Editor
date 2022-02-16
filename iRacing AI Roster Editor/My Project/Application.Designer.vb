@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.iRacing_AI_Roster_Editor.Main
+            Me.MainForm = Global.iRacing_AI_Roster_Editor.frmMain
         End Sub
     End Class
 End Namespace
